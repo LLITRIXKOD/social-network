@@ -1,0 +1,16 @@
+<div *ngIf="user">
+  <div><img [src]="user.photoUrl" alt="User photo"></div>
+  <div><span>id: </span>{{user.id}}</div>
+  <div><label>First Name: <input type="text" [(ngModel)]="user.firstName"></label></div>
+  <div><label>Last Name: <input type="text" [(ngModel)]="user.lastName"></label></div>
+  <div><label>Birthday: <input type="date" [(ngModel)]="user.birthday"></label></div>
+  <div>
+    <label>Vacation: from
+      <input type="date" [(ngModel)]="user.vacation.from">
+    </label>
+    <label>&nbsp;to 
+      <input type="date" [(ngModel)]="user.vacation.to">
+    </label>
+  </div>
+  <button (click)="updateUser()">Update user</button>
+</div>

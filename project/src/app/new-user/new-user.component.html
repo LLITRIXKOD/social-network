@@ -1,0 +1,11 @@
+<div>
+  <label>First name<input type="text" [(ngModel)]="user.firstName"></label>
+  <label>Last name<input type="text" [(ngModel)]="user.lastName"></label>
+  <label>Birthday<input type="date" [(ngModel)]="user.birthday"></label>
+  <!-- <label>Vacation from<input type="date" [(ngModel)]="user.vacation.from"></label><label> to <input type="date" [(ngModel)]="user.vacation.to"></label> -->
+  <label>Photo url<input type="text" [(ngModel)]="user.photoUrl"></label>
+</div>
+<div>
+  <button (click)="addUser(user)">Add user</button>
+</div>
+<span>{{user.firstName}} {{user.birthday}}</span>

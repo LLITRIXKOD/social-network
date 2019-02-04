@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Igor",
+      "lastName": "Marusich",
+      "birthday": "1998-02-04",
+      "vacation": {
+        "from": "2019-03-11",
+        "to": "2019-03-22"
+      },
+      "photoUrl": "https://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/Steven_Hallam-slide.jpg"
+    },
+    {
+      "id": 2,
+      "firstName": "Egor",
+      "lastName": "Stefanovich",
+      "birthday": "1999-02-04",
+      "vacation": {
+        "from": "2019-03-11",
+        "to": "2019-03-22"
+      },
+      "photoUrl": "https://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/Steven_Hallam-slide.jpg"
+    }
+  ]
+}

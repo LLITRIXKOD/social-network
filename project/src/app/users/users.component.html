@@ -1,0 +1,11 @@
+<ul>
+  <li *ngFor="let user of users">
+    <a routerLink="/detail/{{user.id}}">
+      <span>{{user.id}} {{user.firstName}} {{user.lastName}}</span>
+    </a>
+    <button title="delete user"
+      (click)="delete(user)">x</button>
+  </li>
+</ul>
+
+<div><a routerLink="/add">Add new user</a></div>
