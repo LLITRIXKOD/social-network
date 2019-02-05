@@ -1,22 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../user';
+import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { Location } from '@angular/common';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
   styleUrls: ['./new-user.component.css']
 })
-export class NewUserComponent implements OnInit {
-  user = new User();
-  
-  constructor(private userService: UserService, private location: Location) { }
-  addUser(user: User) {
-    this.userService.addUser(user);
-    this.location.back();
-  }
-  ngOnInit() {
-  }
+export class NewUserComponent {
+  newUserForm =this.fb.group({
+    id: [''],
+    firstName: [''],
+    lastName: [''],
+    birthday: [''],
+    vacation: this.fb.group({
+      from: [''],
+      to: [''],
+    }),
+    photoUrl: [''],
+  });
 
+  constructor(private userService: UserService, private location: Location, private fb: FormBuilder) { }
+  addUser() {
+    const user = this.newUserForm.value;
+    this.userService.addUser(user).subscribe(_ => {
+      this.location.back();
+    });
+  }
 }

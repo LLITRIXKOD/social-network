@@ -1,11 +1,60 @@
-<div>
-  <label>First name<input type="text" [(ngModel)]="user.firstName"></label>
-  <label>Last name<input type="text" [(ngModel)]="user.lastName"></label>
-  <label>Birthday<input type="date" [(ngModel)]="user.birthday"></label>
-  <!-- <label>Vacation from<input type="date" [(ngModel)]="user.vacation.from"></label><label> to <input type="date" [(ngModel)]="user.vacation.to"></label> -->
-  <label>Photo url<input type="text" [(ngModel)]="user.photoUrl"></label>
-</div>
-<div>
-  <button (click)="addUser(user)">Add user</button>
-</div>
-<span>{{user.firstName}} {{user.birthday}}</span>
+<form [formGroup]="newUserForm" class="container-fluid mt-4">
+  <div *ngIf="newUserForm.value.photoUrl">
+    <img [src]="newUserForm.value.photoUrl" alt="User photo" />
+  </div>
+  <div class="form-group">
+    <span>Upload photo</span>
+    <div class="custom-file mt-2">
+      <input
+        type="file"
+        class="custom-file-input"
+        id="photoUrl"
+        formControlName="photoUrl"
+      />
+      <label class="custom-file-label" for="photoUrl">Choose file</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input
+      type="text"
+      formControlName="firstName"
+      class="form-control"
+      id="firstName"
+      placeholder="Enter first name"
+    />
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input
+      type="text"
+      formControlName="lastName"
+      class="form-control"
+      id="lastName"
+      placeholder="Enter last name"
+    />
+  </div>
+  <div class="form-group">
+    <label for="birthday">Birthday</label>
+    <input
+      type="date"
+      formControlName="birthday"
+      class="form-control"
+      id="birthday"
+    />
+  </div>
+  <div class="form-row" formGroupName="vacation">
+      <div class="form-group col-md-6">
+        <label for="vacationFrom">Vacation from</label>
+        <input type="date" class="form-control" id="vacationFrom" formControlName="from">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="vacationTo">to</label>
+        <input type="date" class="form-control" id="vacationTo" formControlName="to">
+      </div>
+    </div>
+
+  <button type="button" class="btn btn-primary btn-lg" (click)="addUser(user)">
+    Add user
+  </button>
+</form>

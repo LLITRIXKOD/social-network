@@ -1,11 +1,10 @@
-<ul>
-  <li *ngFor="let user of users">
-    <a routerLink="/detail/{{user.id}}">
-      <span>{{user.id}} {{user.firstName}} {{user.lastName}}</span>
+<div class="container-fluid row">
+  <div class="list-group col-md-2 m-2 mt-4">
+    <a *ngFor="let user of users"
+      routerLink="/detail/{{ user.id }}"
+      class="list-group-item list-group-item-action">
+      <span>{{ user.id }}. {{ user.firstName }} {{ user.lastName }}</span>
+      <button class="btn btn-primary btn-sm" (click)="delete(user)" style="float: right;">x</button>
     </a>
-    <button title="delete user"
-      (click)="delete(user)">x</button>
-  </li>
-</ul>
-
-<div><a routerLink="/add">Add new user</a></div>
+  </div>
+</div>

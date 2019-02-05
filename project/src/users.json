@@ -21,6 +21,17 @@
         "to": "2019-03-22"
       },
       "photoUrl": "https://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/Steven_Hallam-slide.jpg"
+    },
+    {
+      "id": 1549356872969,
+      "firstName": "Игорь",
+      "lastName": "Марусич",
+      "birthday": "2019-02-14",
+      "vacation": {
+        "from": "2019-02-15",
+        "to": "2019-02-23"
+      },
+      "photoUrl": "C:\\fakepath\\Elon_Musk_2015.jpg"
     }
   ]
 }

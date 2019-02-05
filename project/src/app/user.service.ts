@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -38,7 +38,7 @@ export class UserService {
       );
   }
   updateUser(user: User): Observable<any>{
-    return this.http.put(this.usersUrl, user, httpOptions).pipe(
+    return this.http.put(`${this.usersUrl}/${user.id}`, user, httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
   }
