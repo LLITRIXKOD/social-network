@@ -1,15 +1,14 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">SOCIAL NETWORK</a>
+    <h1 class="navbar-brand">SOCIAL NETWORK</h1>
     <div class="collapse navbar-collapse">
       <div class="navbar-nav">
         <a href="#" class="nav-item nav-link active">Home</a>
         <a href="/add" class="nav-item nav-link">Add user</a>
-        <a href="#" class="nav-item nav-link">About us</a>
       </div>
     </div>
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" />
+    <form (ngSubmit)="onSubmit()" class="form-inline">
+      <input [(ngModel)]="search" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" />
       <button class="btn btn-outline-success my-2" type="submit">Search</button>
     </form>
   </nav>

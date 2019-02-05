@@ -11,6 +11,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

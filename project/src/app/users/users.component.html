@@ -1,10 +1,15 @@
-<div class="container-fluid row">
-  <div class="list-group col-md-2 m-2 mt-4">
-    <a *ngFor="let user of users"
-      routerLink="/detail/{{ user.id }}"
-      class="list-group-item list-group-item-action">
-      <span>{{ user.id }}. {{ user.firstName }} {{ user.lastName }}</span>
-      <button class="btn btn-primary btn-sm" (click)="delete(user)" style="float: right;">x</button>
-    </a>
+<ngx-spinner><p style="color: white" >Loading... </p></ngx-spinner>
+
+<div *ngIf="users">
+  {{spinner.hide()}}
+  <div class="container-fluid">
+    <div class="list-group m-2 mt-4">
+      <a *ngFor="let user of users; let i = index"
+        routerLink="/detail/{{ user.id }}"
+        class="list-group-item list-group-item-action mb-1">
+        <span>{{ i + 1 }}. {{ user.firstName }} {{ user.lastName }}</span>
+        <button class="btn btn-primary btn-xs" (click)="delete(user)" style="float: right;">x</button>
+      </a>
+    </div>
   </div>
 </div>

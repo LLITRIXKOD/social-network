@@ -31,7 +31,6 @@ export class UserService {
   }
   addUser(user: User): Observable<User> {
     user.id = Date.now();
-    console.log(user);
     return this.http.post<User>(this.usersUrl, user, httpOptions)
       .pipe(
         catchError(this.handleError('addUser', user))
