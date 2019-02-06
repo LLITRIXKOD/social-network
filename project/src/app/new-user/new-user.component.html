@@ -1,4 +1,4 @@
-<form [formGroup]="newUserForm" class="container-fluid mt-4">
+<form [formGroup]="newUserForm" (ngSubmit)="onSubmit()" class="container-fluid mt-4">
   <div *ngIf="newUserForm.value.photoUrl">
     <img [src]="newUserForm.value.photoUrl" alt="User photo" />
   </div>
@@ -15,46 +15,50 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="firstName">First name</label>
+    <label for="firstName">First name *</label>
     <input
       type="text"
       formControlName="firstName"
       class="form-control"
       id="firstName"
       placeholder="Enter first name"
+      required
     />
   </div>
   <div class="form-group">
-    <label for="lastName">Last name</label>
+    <label for="lastName">Last name *</label>
     <input
       type="text"
       formControlName="lastName"
       class="form-control"
       id="lastName"
       placeholder="Enter last name"
+      required
     />
   </div>
   <div class="form-group">
-    <label for="birthday">Birthday</label>
+    <label for="birthday">Birthday *</label>
     <input
       type="date"
       formControlName="birthday"
       class="form-control"
       id="birthday"
+      [max]="todayDate"
+      required
     />
   </div>
   <div class="form-row" formGroupName="vacation">
       <div class="form-group col-md-6">
         <label for="vacationFrom">Vacation from</label>
-        <input type="date" class="form-control" id="vacationFrom" formControlName="from">
+        <input [min]="todayDate" type="date" class="form-control" id="vacationFrom" formControlName="from">
       </div>
       <div class="form-group col-md-6">
         <label for="vacationTo">to</label>
-        <input type="date" class="form-control" id="vacationTo" formControlName="to">
+        <input type="date" [min]="pickFromDate()" class="form-control" id="vacationTo" formControlName="to">
       </div>
     </div>
 
-  <button type="button" class="btn btn-primary btn-lg" (click)="addUser(user)">
+  <button type="submit" class="btn btn-primary btn-lg" [disabled]="!newUserForm.valid">
     Add user
   </button>
 </form>

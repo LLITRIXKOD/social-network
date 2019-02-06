@@ -1,15 +1,22 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <h1 class="navbar-brand">SOCIAL NETWORK</h1>
-    <div class="collapse navbar-collapse">
-      <div class="navbar-nav">
-        <a href="#" class="nav-item nav-link active">Home</a>
-        <a href="/add" class="nav-item nav-link">Add user</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light row">
+    <div class="col-md-8 row">
+      <div class="col-md-4">
+        <h1 class="navbar-brand text-justify">SOCIAL NETWORK</h1>
+      </div>
+      <div class="navbar-nav col-md-8">
+        <a routerLink="/users" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true } ">Home</a>
+        <a routerLink="/add" routerLinkActive="active" class="nav-item nav-link">Add user</a>
       </div>
     </div>
-    <form (ngSubmit)="onSubmit()" class="form-inline">
-      <input [(ngModel)]="search" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" />
-      <button class="btn btn-outline-success my-2" type="submit">Search</button>
-    </form>
+    <div class="col-md-4">
+      <form class="form-inline">
+        <div>
+          <input [(ngModel)]="search" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" />
+        </div>
+        <button class="btn btn-outline-success my-2" (click)="onSubmit()" type="submit">Search</button>
+        <button class="btn" id="cross" (click)="showAll()">X</button>
+      </form>
+    </div>
   </nav>
 </header>

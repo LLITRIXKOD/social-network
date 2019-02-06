@@ -5,3 +5,11 @@ button {
 button:hover {
     background-color: #007bff;
 }
+button#cross {
+    font-size: 16px;
+    color: black;
+    border: none;
+}
+button#cross:hover {
+    background-color: #cacaca8e;
+}

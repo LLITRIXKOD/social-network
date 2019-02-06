@@ -1,15 +1,17 @@
-<ngx-spinner><p style="color: white" >Loading... </p></ngx-spinner>
+<ngx-spinner><p style="color: white" >Loading...</p></ngx-spinner>
 
 <div *ngIf="users">
-  {{spinner.hide()}}
   <div class="container-fluid">
     <div class="list-group m-2 mt-4">
-      <a *ngFor="let user of users; let i = index"
-        routerLink="/detail/{{ user.id }}"
+      <li *ngFor="let user of users; let i = index"
+        [routerLink]="'/detail/'+ user.id"
         class="list-group-item list-group-item-action mb-1">
-        <span>{{ i + 1 }}. {{ user.firstName }} {{ user.lastName }}</span>
+        <a>{{ i + 1 }}. {{ user.firstName }} {{ user.lastName }}</a>
         <button class="btn btn-primary btn-xs" (click)="delete(user)" style="float: right;">x</button>
-      </a>
+    </li>
     </div>
   </div>
+</div>
+<div *ngIf="users === null">
+  Users not found
 </div>

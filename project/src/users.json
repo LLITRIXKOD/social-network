@@ -1,17 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "firstName": "Igor",
-      "lastName": "Marusich",
-      "birthday": "1998-02-04",
-      "vacation": {
-        "from": "2019-03-11",
-        "to": "2019-03-22"
-      },
-      "photoUrl": "https://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/Steven_Hallam-slide.jpg"
-    },
-    {
       "id": 2,
       "firstName": "Egor",
       "lastName": "Stefanovich",
@@ -23,15 +12,15 @@
       "photoUrl": "https://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/Steven_Hallam-slide.jpg"
     },
     {
-      "id": 3,
-      "firstName": "Игорь",
-      "lastName": "Марусич",
-      "birthday": "2019-02-14",
+      "id": 1549469915790,
+      "firstName": "Igor",
+      "lastName": "Marusich",
+      "birthday": "2012-11-12",
       "vacation": {
-        "from": "2019-02-08",
-        "to": "2019-02-22"
+        "from": "2019-02-07",
+        "to": "2019-02-11"
       },
-      "photoUrl": ""
+      "photoUrl": "https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg"
     }
   ]
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, tap, delay } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,11 +15,20 @@ const httpOptions = {
 })
 export class UserService {
   private usersUrl = 'http://localhost:3000/users';
+  private users: User[];
+  private usersSubject: Subject<User[]> = new Subject<User[]>();
+  public users$ = this.usersSubject.asObservable();
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<User[]> {
+
+  loadUsers(): Observable<any> {
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
+        tap(users => {
+          this.users = users;
+          this.usersSubject.next(this.users);
+        }),
+        delay(300),
         catchError(this.handleError('getUsers', []))
       );
   }
@@ -33,6 +42,10 @@ export class UserService {
     user.id = Date.now();
     return this.http.post<User>(this.usersUrl, user, httpOptions)
       .pipe(
+        tap(_ => {
+          this.users.push(user);
+          this.usersSubject.next(this.users);
+        }),
         catchError(this.handleError('addUser', user))
       );
   }
@@ -41,7 +54,7 @@ export class UserService {
       catchError(this.handleError<any>('updateUser'))
     );
   }
-  deleteUser(user: User): Observable<User> {
+  deleteUser(user: User | number): Observable<User> {
     const id = typeof user === 'number' ? user : user.id;
     const url = `${this.usersUrl}/${id}`;
 
@@ -49,10 +62,23 @@ export class UserService {
       catchError(this.handleError<User>('deleteUser'))
     );
   }
+  filterUsers(search: string): void {
+    let foundUsers = this.users.filter((item) => {
+      let note = `${item.firstName} ${item.lastName}`;
+      let position = note.toUpperCase().indexOf(search.toUpperCase());
+      if(position >= 0) {
+        return item.id;
+      }
+    });
+      if(foundUsers.length !== 0) {
+        this.usersSubject.next(foundUsers);
+      } else {
+        this.usersSubject.next(null);
+      }
+  }
   private handleError<T> (operation = 'operation', result?: T) {
     return  (error: any): Observable<T> => {
       console.log(`${operation} failed: ${error.message}`);
-
       return of(result as T);
     }
   }
