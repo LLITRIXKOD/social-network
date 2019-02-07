@@ -12,9 +12,8 @@ export class CapComponent {
   }
   onSubmit() {
     this.userService.filterUsers(this.search);
-    this.search = "";
   }
   showAll() {
-    this.userService.filterUsers("");
+    this.userService.filterUsers('');
   }
 }

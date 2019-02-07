@@ -1,4 +1,4 @@
-<form [formGroup]="newUserForm" (ngSubmit)="onSubmit()" class="container-fluid mt-4">
+<form [formGroup]="newUserForm" class="container-fluid mt-4">
   <div *ngIf="newUserForm.value.photoUrl">
     <img [src]="newUserForm.value.photoUrl" alt="User photo" />
   </div>
@@ -22,9 +22,12 @@
       class="form-control"
       id="firstName"
       placeholder="Enter first name"
-      required
+      required #firstName
     />
   </div>
+  <span *ngIf="checkValue('firstName')" >
+    dfgdfh
+  </span>
   <div class="form-group">
     <label for="lastName">Last name *</label>
     <input
@@ -47,14 +50,14 @@
       required
     />
   </div>
-  <div class="form-row" formGroupName="vacation">
+  <div class="form-row vacation" formGroupName="vacation">
       <div class="form-group col-md-6">
         <label for="vacationFrom">Vacation from</label>
-        <input [min]="todayDate" type="date" class="form-control" id="vacationFrom" formControlName="from">
+        <input [min]="todayDate" [max]="pickVacationToDate()" type="date" class="form-control" id="vacationFrom" formControlName="from">
       </div>
       <div class="form-group col-md-6">
         <label for="vacationTo">to</label>
-        <input type="date" [min]="pickFromDate()" class="form-control" id="vacationTo" formControlName="to">
+        <input type="date" [min]="pickVacationFromDate()" class="form-control" id="vacationTo" formControlName="to">
       </div>
     </div>
 
