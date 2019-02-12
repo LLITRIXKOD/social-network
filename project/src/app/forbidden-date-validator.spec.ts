@@ -1,7 +1,7 @@
-import { ForbiddenDateValidator } from './forbidden-date-validator';
+import { DateValidator } from './forbidden-date-validator';
 
 describe('ForbiddenDateValidator', () => {
   it('should create an instance', () => {
-    expect(new ForbiddenDateValidator()).toBeTruthy();
+    expect(new DateValidator()).toBeTruthy();
   });
 });

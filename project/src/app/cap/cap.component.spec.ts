@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CapComponent } from './cap.component';
+import {RouterModule} from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {UserService} from '../user.service';
+import {HttpClient} from '@angular/common/http';
 
 describe('CapComponent', () => {
   let component: CapComponent;
@@ -8,7 +12,8 @@ describe('CapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CapComponent ]
+      imports: [RouterModule, FormsModule],
+      declarations: [CapComponent],
     })
     .compileComponents();
   }));

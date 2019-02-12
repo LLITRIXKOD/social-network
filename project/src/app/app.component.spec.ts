@@ -1,11 +1,21 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {CapComponent} from './cap/cap.component';
+import {CellarComponent} from './cellar/cellar.component';
+import {UsersComponent} from './users/users.component';
+import {UserDetailComponent} from './user-detail/user-detail.component';
+import {NewUserComponent} from './new-user/new-user.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+          CapComponent,
+          CellarComponent,
+          UsersComponent,
+          UserDetailComponent,
+          NewUserComponent
       ],
     }).compileComponents();
   }));

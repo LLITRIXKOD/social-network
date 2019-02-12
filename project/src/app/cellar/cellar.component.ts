@@ -5,11 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './cellar.component.html',
   styleUrls: ['./cellar.component.css']
 })
-export class CellarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class CellarComponent {
 }

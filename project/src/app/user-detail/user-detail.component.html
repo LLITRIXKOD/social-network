@@ -1,16 +1,31 @@
-<div *ngIf="user">
-  <div><img [src]="user.photoUrl" alt="User photo"></div>
-  <div><span>id: </span>{{user.id}}</div>
-  <div><label>First Name: <input type="text" [(ngModel)]="user.firstName"></label></div>
-  <div><label>Last Name: <input type="text" [(ngModel)]="user.lastName"></label></div>
-  <div><label>Birthday: <input type="date" [(ngModel)]="user.birthday"></label></div>
-  <div>
-    <label>Vacation: from
-      <input type="date" [(ngModel)]="user.vacation.from">
-    </label>
-    <label>&nbsp;to 
-      <input type="date" [(ngModel)]="user.vacation.to">
-    </label>
+<div class="card mx-auto mt-2 animated bounceOutLeft">
+  <div class="" id="logoDiv">
+    <img class="img-fluid mx-auto"
+         [src]=" user?.file || 'https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg'"
+         alt="User photo">
   </div>
-  <button (click)="updateUser()">Update user</button>
+  <div class="px-4 container" id="cardInfo">
+    <p class="text-muted">{{user?.birthday.split("T")[0]}}</p>
+    <h3 class="text-center">{{user?.firstName}} {{user?.lastName}}</h3>
+    <div  *ngIf="haveVacation">
+      <h5 class="text-info">Vacation:</h5>
+      <div class="vacation mb-3">
+        <div class="row">
+          <span class="font-italic col-3">from</span>
+          <span class="text-info">{{user?.vacation?.from}}</span>
+        </div>
+        <div class="row">
+          <span class="font-italic col-3">to</span>
+          <span class="text-info">{{user?.vacation?.to}}</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="user?.education.length > 1 || (user?.education.length === 1 && !!user?.education[0])">
+      <ul class="list-group list-group-flush">
+        <h5 class="text-info">Education: </h5>
+        <li *ngFor="let institution of user.education" class="list-group-item">{{institution}}</li>
+      </ul>
+    </div>
+  </div>
+  <button class="btn btn-info" (click)="updateUser()">Update user</button>
 </div>

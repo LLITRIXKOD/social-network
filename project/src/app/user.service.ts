@@ -20,7 +20,6 @@ export class UserService {
   public users$ = this.usersSubject.asObservable();
   constructor(private http: HttpClient) { }
 
-
   loadUsers(): Observable<any> {
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
@@ -49,7 +48,7 @@ export class UserService {
         catchError(this.handleError('addUser', user))
       );
   }
-  updateUser(user: User): Observable<any>{
+  updateUser(user: User): Observable<any> {
     return this.http.put(`${this.usersUrl}/${user.id}`, user, httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
@@ -63,14 +62,14 @@ export class UserService {
     );
   }
   filterUsers(search: string): void {
-    let foundUsers = this.users.filter((item) => {
-      let note = `${item.firstName} ${item.lastName}`;
-      let position = note.toUpperCase().indexOf(search.toUpperCase());
-      if(position >= 0) {
+    const foundUsers = this.users.filter((item) => {
+      const note = `${item.firstName} ${item.lastName}`;
+      const position = note.toUpperCase().indexOf(search.toUpperCase());
+      if (position >= 0) {
         return item.id;
       }
     });
-      if(foundUsers.length !== 0) {
+      if (foundUsers.length !== 0) {
         this.usersSubject.next(foundUsers);
       } else {
         this.usersSubject.next(null);
@@ -80,6 +79,6 @@ export class UserService {
     return  (error: any): Observable<T> => {
       console.log(`${operation} failed: ${error.message}`);
       return of(result as T);
-    }
+    };
   }
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { UserService } from '../user.service';
+import {Component} from '@angular/core';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-cap',
@@ -8,12 +8,16 @@ import { UserService } from '../user.service';
 })
 export class CapComponent {
   public search: string;
+
   constructor(private userService: UserService) {
   }
-  onSubmit() {
+
+  public onSubmit(): void {
     this.userService.filterUsers(this.search);
   }
+
   showAll() {
     this.userService.filterUsers('');
+    this.search = '';
   }
 }

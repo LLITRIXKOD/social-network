@@ -1,3 +1,15 @@
-img {
-    width: 150px;
+* {
+  font-family: "Baskerville Old Face";
 }
+.card {
+  width: 20rem;
+}
+#logoDiv {
+  background: #CCCCCC32;
+}
+img {
+  display: block;
+  width: 150px;
+  height: 150px;
+}
+

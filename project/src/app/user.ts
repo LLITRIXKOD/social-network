@@ -2,8 +2,8 @@ class Vacation {
     from: string;
     to: string;
     constructor() {
-        this.from = "";
-        this.to = "";
+        this.from = '';
+        this.to = '';
     }
 }
 
@@ -11,16 +11,16 @@ export class User {
     id: number;
     firstName: string;
     lastName: string;
-    birthday: string;
+    birthday: Date;
     vacation: Vacation;
-    photoUrl: string;
-    
+    file: string;
+    education: [];
     constructor() {
         this.id = 0;
-        this.firstName = "";
-        this.lastName = "";
-        this.birthday = "";
+        this.firstName = '';
+        this.lastName = '';
+        this.birthday = new Date();
         this.vacation = new Vacation();
-        this.photoUrl = "";
+        this.file = '';
     }
 }

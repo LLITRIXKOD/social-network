@@ -1,17 +1,18 @@
-<form [formGroup]="newUserForm" class="container-fluid mt-4">
-  <div *ngIf="newUserForm.value.photoUrl">
-    <img [src]="newUserForm.value.photoUrl" alt="User photo" />
+<form [formGroup]="newUserForm" (ngSubmit)="onSubmit()" class="container-fluid mt-4">
+  <div *ngIf="newUserForm.value.file">
+    <img [src]="newUserForm.value.file || imageSrc" width="150" height="150" alt="User photo" />
   </div>
-  <div class="form-group">
-    <span>Upload photo</span>
+  <div *ngIf="imageSrc" class="form-group">
+    <label for="file">Upload photo</label>
     <div class="custom-file mt-2">
       <input
         type="file"
         class="custom-file-input"
-        id="photoUrl"
-        formControlName="photoUrl"
+        id="file"
+        formControlName="file"
+        (change)="onFileChange($event)"
       />
-      <label class="custom-file-label" for="photoUrl">Choose file</label>
+      <label class="custom-file-label" for="file">Choose file</label>
     </div>
   </div>
   <div class="form-group">
@@ -22,11 +23,11 @@
       class="form-control"
       id="firstName"
       placeholder="Enter first name"
-      required #firstName
+      required
     />
   </div>
-  <span *ngIf="checkValue('firstName')" >
-    dfgdfh
+  <span *ngIf="checkValue('firstName')" class="alert alert-danger">
+    First name must be Latin 
   </span>
   <div class="form-group">
     <label for="lastName">Last name *</label>
@@ -39,16 +40,28 @@
       required
     />
   </div>
+  <span *ngIf="checkValue('lastName')" class="alert alert-danger">
+    Last name must be Latin 
+  </span>
   <div class="form-group">
     <label for="birthday">Birthday *</label>
-    <input
-      type="date"
-      formControlName="birthday"
-      class="form-control"
-      id="birthday"
-      [max]="todayDate"
-      required
-    />
+    <p-calendar class="row ml-0" id="birthday" formControlName="birthday" required="true" placeholder="Enter birthday" [maxDate]="today()"></p-calendar>
+  </div>
+  <div formArrayName="education">
+    <label for="education0">Education</label>
+    <button type="button" [disabled]="newUserForm.value.education.length >= 5" class="btn btn-light btn-sm ml-1 font-weight-bold plus" (click)="addEducation()">+</button>
+    <div *ngFor="let institution of education.controls; let i = index">
+      <div class="form-group row">
+        <input
+          type="text"
+          [formControlName]="i"
+          class="form-control col-md-11 ml-3"
+          [id]="'education' + i"
+          [placeholder]="i + 1 + ' institution'"
+        />
+        <button *ngIf="i + 1 === newUserForm.value.education.length && i !== 0" (click)="deleteEducation()" type="button" class="btn btn-light btn-sm ml-1 font-weight-bold minus" >-</button>
+      </div>
+    </div>
   </div>
   <div class="form-row vacation" formGroupName="vacation">
       <div class="form-group col-md-6">
@@ -60,8 +73,5 @@
         <input type="date" [min]="pickVacationFromDate()" class="form-control" id="vacationTo" formControlName="to">
       </div>
     </div>
-
-  <button type="submit" class="btn btn-primary btn-lg" [disabled]="!newUserForm.valid">
-    Add user
-  </button>
+  <input type="submit" class="btn btn-primary btn-lg" [disabled]="!newUserForm.valid" [value]="newUserForm.value.id ? 'Update user' : 'Add user'">
 </form>
