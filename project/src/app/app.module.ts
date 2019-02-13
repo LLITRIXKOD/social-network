@@ -7,16 +7,24 @@ import { CapComponent } from './cap/cap.component';
 import { CellarComponent } from './cellar/cellar.component';
 import { UsersComponent } from './users/users.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {AccordionModule} from 'primeng/accordion';
 import {CalendarModule} from 'primeng/calendar';
+import {DropdownModule} from 'primeng/dropdown';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
   declarations: [
@@ -38,8 +46,18 @@ import {CalendarModule} from 'primeng/calendar';
     ToastrModule.forRoot(),
     AccordionModule,
     CalendarModule,
+    DropdownModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    NgbModule
   ],
-  exports: [AppComponent,
+  exports: [
+    AppComponent,
     CapComponent,
     CellarComponent,
     UsersComponent,

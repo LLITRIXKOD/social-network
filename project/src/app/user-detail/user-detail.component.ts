@@ -10,18 +10,16 @@ import {User} from '../user';
 })
 export class UserDetailComponent implements OnInit {
   user: User;
-  router: Router;
-  haveVacation = false;
+  haveVacation: boolean;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    router: Router
-  ) {
-    this.router = router;
+    private router: Router) {
+      this.haveVacation = false;
   }
 
   public getUser(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id: number = +this.route.snapshot.paramMap.get('id');
     this.userService.getUser(id)
       .subscribe(user => {
         this.user = user;
@@ -30,10 +28,10 @@ export class UserDetailComponent implements OnInit {
         }
       });
   }
-  public updateUser() {
+  public updateUser(): void {
     this.router.navigateByUrl(`/update/${this.user.id}`);
   }
-  ngOnInit() {
+  ngOnInit(): void {
     this.getUser();
   }
 }

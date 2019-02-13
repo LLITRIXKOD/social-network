@@ -1,10 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../user.service';
-import {Validators, FormBuilder, FormArray} from '@angular/forms';
+import {Validators, FormBuilder, FormArray, FormGroup} from '@angular/forms';
 import {User} from '../user';
 import {DateValidator} from '../forbidden-date-validator';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+
+interface Specialty {
+  name: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-new-user',
@@ -12,10 +17,12 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./new-user.component.css']
 })
 export class NewUserComponent implements OnInit {
+  public checked: boolean = false;
+  specialties: Specialty[];
+  selectedSpecialty: Specialty;
   public todayDate: string;
   public imageSrc: string;
-  private router: Router;
-  public newUserForm = this.fb.group({
+  public newUserForm: FormGroup = this.fb.group({
     id: [''],
     firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
     lastName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
@@ -30,14 +37,20 @@ export class NewUserComponent implements OnInit {
     ]),
   });
 
-  constructor(router: Router, private userService: UserService, private fb: FormBuilder,
+  constructor(private router: Router, private userService: UserService, private fb: FormBuilder,
               private route: ActivatedRoute, private toastr: ToastrService) {
-    this.router = router;
     this.todayDate = new Date().toISOString().split('T')[0];
+    this.specialties = [
+      {name: 'Engineer', code: 'eng'},
+      {name: 'Programmer', code: 'pro'},
+      {name: 'Notaries', code: 'not'}
+    ];
   }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    console.log(this.route.snapshot.queryParams);
+    this.checked = !!this.route.snapshot.queryParams.check;
+    const id: number = +this.route.snapshot.paramMap.get('id');
     if (id !== 0) {
       this.getUser(id);
     }
@@ -59,15 +72,15 @@ export class NewUserComponent implements OnInit {
     }
   }
 
-  public checkValue(controlName: string) {
+  public checkValue(controlName: string): boolean {
     return (this.newUserForm.get(controlName).dirty || this.newUserForm.get(controlName).touched)
       && this.newUserForm.get(controlName).invalid;
   }
 
-  public onFileChange(event) {
+  public onFileChange(event: any): void {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
+      const file: File = event.target.files[0];
+      const reader: FileReader = new FileReader();
 
       reader.onloadend = e => {
         this.imageSrc = reader.result.toString();
@@ -76,23 +89,29 @@ export class NewUserComponent implements OnInit {
     }
   }
 
-  public addEducation() {
+  public addEducation(): void {
     this.education.push(this.fb.control(''));
   }
 
-  public deleteEducation() {
+  public deleteEducation(): void {
     this.education.removeAt(this.education.length - 1);
   }
-
-  public today() {
+  public addQuery(event: any): void {
+    if (event.target.checked) {
+      this.router.navigate([], { queryParams: { check: 'true'}});
+    } else {
+      this.router.navigate([]);
+    }
+  }
+  public today(): Date {
     return new Date(this.todayDate);
   }
 
-  private get education() {
+  private get education(): FormArray {
     return this.newUserForm.get('education') as FormArray;
   }
 
-  private getUser(id): void {
+  private getUser(id: number): void {
     this.userService.getUser(id).subscribe((user) => {
       Object.keys(this.newUserForm.controls).forEach((item) => {
         if (item === 'birthday') {

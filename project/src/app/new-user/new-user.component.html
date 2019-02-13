@@ -22,7 +22,7 @@
       formControlName="firstName"
       class="form-control"
       id="firstName"
-      placeholder="Enter first name"
+      [placeholder]="'Enter first name' | translate"
       required
     />
   </div>
@@ -75,3 +75,8 @@
     </div>
   <input type="submit" class="btn btn-primary btn-lg" [disabled]="!newUserForm.valid" [value]="newUserForm.value.id ? 'Update user' : 'Add user'">
 </form>
+
+<label for="isQuery">Add query parameters</label>
+<input type="checkbox" [(ngModel)]="checked" (change)="addQuery($event)" id="isQuery">
+
+<p-dropdown [options]="specialties" [(ngModel)]="selectedSpecialty" placeholder="Select a specialty" optionLabel="name" [showClear]="true"></p-dropdown>

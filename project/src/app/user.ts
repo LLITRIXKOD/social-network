@@ -14,7 +14,7 @@ export class User {
     birthday: Date;
     vacation: Vacation;
     file: string;
-    education: [];
+  education: string[];
     constructor() {
         this.id = 0;
         this.firstName = '';

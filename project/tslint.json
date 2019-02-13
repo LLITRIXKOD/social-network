@@ -3,6 +3,14 @@
     "codelyzer"
   ],
   "rules": {
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration"
+    ],
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
@@ -60,7 +68,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-misused-new": true,

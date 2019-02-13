@@ -16,7 +16,7 @@ export class CapComponent {
     this.userService.filterUsers(this.search);
   }
 
-  showAll() {
+  showAll(): void {
     this.userService.filterUsers('');
     this.search = '';
   }
