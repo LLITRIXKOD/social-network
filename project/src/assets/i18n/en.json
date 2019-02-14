@@ -1,5 +1,9 @@
 {
   "HOME": {
     "TITLE": "Hello"
-  }
+  },
+  "SPECIALTIES": [
+    {"name": "Engineer", "code": "eng"},
+    {"name": "Programmer", "code": "pro"}
+  ]
 }

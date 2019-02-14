@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../user.service';
-import {User} from '../user';
+import {UserService} from '../../user.service';
+import {User} from '../../user';
+import {AuthIsAdminGuard} from '../../auth-is-admin.guard';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,7 +15,8 @@ export class UserDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    private adminGuard: AuthIsAdminGuard) {
       this.haveVacation = false;
   }
 
@@ -29,7 +31,7 @@ export class UserDetailComponent implements OnInit {
       });
   }
   public updateUser(): void {
-    this.router.navigateByUrl(`/update/${this.user.id}`);
+    this.router.navigateByUrl(`/create/update/${this.user.id}`);
   }
   ngOnInit(): void {
     this.getUser();

@@ -27,5 +27,5 @@
       </ul>
     </div>
   </div>
-  <button class="btn btn-info" (click)="updateUser()">Update user</button>
+  <button *ngIf="adminGuard.isAdmin" class="btn btn-info" (click)="updateUser()">Update user</button>
 </div>

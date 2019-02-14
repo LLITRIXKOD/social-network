@@ -1,0 +1,34 @@
+<ngx-spinner><p style="color: white">Loading...</p></ngx-spinner>
+
+<div *ngIf="users">
+  <div class="container-fluid">
+    <div class="list-group m-2 mt-4">
+      <li *ngFor="let user of users; let i = index"
+          class="list-group-item list-group-item-action mb-1">
+        <a [routerLink]="'/display/detail/'+ user.id">{{ i + 1 }}. {{ user.firstName }} {{ user.lastName }}</a>
+        <button class="btn btn-primary btn-xs d-block col-1" (click)="openModal(content, user)" style="float: right;">x</button>
+      </li>
+    </div>
+  </div>
+</div>
+<div *ngIf="users === null || users?.length === 0">
+  Users not found
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Attention</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Do you want to remove a user?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="delete(); modal.close('Cross click')">Yes, remove</button>
+    <button type="button" class="btn btn-secondary" ngbAutofocus (click)="modal.close('Cross click')" data-dismiss="modal">Close</button>
+  </div>
+</ng-template>
+
+

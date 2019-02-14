@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersComponent } from './users.component';
-import {UserService} from '../user.service';
+import {UserService} from '../../user.service';
 import {NgxSpinnerComponent, NgxSpinnerService} from 'ngx-spinner';
 
 describe('UsersComponent', () => {

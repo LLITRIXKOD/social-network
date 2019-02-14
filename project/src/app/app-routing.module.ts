@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsersComponent } from './users/users.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { NewUserComponent } from './new-user/new-user.component';
+import {LogInComponent} from './log-in/log-in.component';
+import {AuthLoginGuard} from './auth-login.guard';
+import {AuthIsAdminGuard} from './auth-is-admin.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/users', pathMatch: 'full' },
-  { path: 'users', component: UsersComponent },
-  { path: 'detail/:id', component: UserDetailComponent },
-  { path: 'add', component: NewUserComponent },
-  {path: 'update/:id', component: NewUserComponent },
+  { path: '', redirectTo: '/auth', pathMatch: 'full'},
+  { path: 'auth', component: LogInComponent },
+  { path: 'display', loadChildren: './display-users/display-users.module#DisplayUsersModule', canActivate: [AuthLoginGuard]},
+  { path: 'create', loadChildren: './create-users/create-users.module#CreateUsersModule', canActivate: [AuthIsAdminGuard, AuthLoginGuard]},
 ];
 
 @NgModule({

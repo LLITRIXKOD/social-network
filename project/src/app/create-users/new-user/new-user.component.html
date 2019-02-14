@@ -1,8 +1,8 @@
 <form [formGroup]="newUserForm" (ngSubmit)="onSubmit()" class="container-fluid mt-4">
-  <div *ngIf="newUserForm.value.file">
-    <img [src]="newUserForm.value.file || imageSrc" width="150" height="150" alt="User photo" />
+  <div *ngIf="imageSrc">
+    <img [src]="imageSrc" width="150" height="150" alt="User photo" />
   </div>
-  <div *ngIf="imageSrc" class="form-group">
+  <div *ngIf="!imageSrc" class="form-group">
     <label for="file">Upload photo</label>
     <div class="custom-file mt-2">
       <input
@@ -41,7 +41,7 @@
     />
   </div>
   <span *ngIf="checkValue('lastName')" class="alert alert-danger">
-    Last name must be Latin 
+    Last name must be Latin
   </span>
   <div class="form-group">
     <label for="birthday">Birthday *</label>
@@ -76,7 +76,7 @@
   <input type="submit" class="btn btn-primary btn-lg" [disabled]="!newUserForm.valid" [value]="newUserForm.value.id ? 'Update user' : 'Add user'">
 </form>
 
-<label for="isQuery">Add query parameters</label>
-<input type="checkbox" [(ngModel)]="checked" (change)="addQuery($event)" id="isQuery">
+<!--<label for="isQuery">Add query parameters</label>-->
+<!--<input type="checkbox" [(ngModel)]="checked" (change)="addQuery($event)" id="isQuery">-->
 
-<p-dropdown [options]="specialties" [(ngModel)]="selectedSpecialty" placeholder="Select a specialty" optionLabel="name" [showClear]="true"></p-dropdown>
+<!--<p-dropdown class="row" [options]="'SPECIALTIES' | translate" [(ngModel)]="selectedSpecialty" placeholder="Select a specialty" optionLabel="name" [showClear]="true"></p-dropdown>-->

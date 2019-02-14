@@ -1,8 +1,8 @@
 import { async, TestBed } from '@angular/core/testing';
 
 import { UserDetailComponent } from './user-detail.component';
-import {User} from '../user';
-import {ActivatedRouteStub} from '../../testing/activated-route-stub';
+import {User} from '../../user';
+import {ActivatedRouteStub} from '../../../testing/activated-route-stub';
 import {createComponent} from '@angular/compiler/src/core';
 
 describe('UserDetailComponent', () => {

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import {Observable, of, Subject, Subscription} from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
+import {UserOfSystem} from './user-of-system';
 
-const httpOptions = {
+const httpOptions: object = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
@@ -14,13 +15,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  private usersUrl = 'http://localhost:3000/users';
+  private usersUrl: string = 'http://localhost:3000/users';
+  private usersOfSystemUrl: string = 'http://localhost:3000/usersOfSystem';
   private users: User[];
   private usersSubject: Subject<User[]> = new Subject<User[]>();
-  public users$ = this.usersSubject.asObservable();
+  public users$: Observable<User[]> = this.usersSubject.asObservable();
   constructor(private http: HttpClient) { }
 
-  loadUsers(): Observable<any> {
+  public loadUsers (): Observable<any> {
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
         tap(users => {
@@ -31,13 +33,13 @@ export class UserService {
         catchError(this.handleError('getUsers', []))
       );
   }
-  getUser(id: number): Observable<User> {
-    const url = `${this.usersUrl}/${id}`;
+  public getUser (id: number): Observable<User> {
+    const url: string = `${this.usersUrl}/${id}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError<User>(`getUser id=${id}`))
     );
   }
-  addUser(user: User): Observable<User> {
+  public addUser (user: User): Observable<User> {
     user.id = Date.now();
     return this.http.post<User>(this.usersUrl, user, httpOptions)
       .pipe(
@@ -48,23 +50,22 @@ export class UserService {
         catchError(this.handleError('addUser', user))
       );
   }
-  updateUser(user: User): Observable<any> {
+  public updateUser (user: User): Observable<any> {
     return this.http.put(`${this.usersUrl}/${user.id}`, user, httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
   }
-  deleteUser(user: User | number): Observable<User> {
-    const id = typeof user === 'number' ? user : user.id;
-    const url = `${this.usersUrl}/${id}`;
-
+  public deleteUser (user: User | number): Observable<User> {
+    const id: number = typeof user === 'number' ? user : user.id;
+    const url: string = `${this.usersUrl}/${id}`;
     return this.http.delete<User>(url, httpOptions).pipe(
       catchError(this.handleError<User>('deleteUser'))
     );
   }
-  filterUsers(search: string): void {
-    const foundUsers = this.users.filter((item) => {
-      const note = `${item.firstName} ${item.lastName}`;
-      const position = note.toUpperCase().indexOf(search.toUpperCase());
+  public filterUsers (search: string): void {
+    const foundUsers: User[] = this.users.filter((item) => {
+      const note: string = `${item.firstName} ${item.lastName}`;
+      const position: number = note.toUpperCase().indexOf(search.toUpperCase());
       if (position >= 0) {
         return item.id;
       }
@@ -75,7 +76,14 @@ export class UserService {
         this.usersSubject.next(null);
       }
   }
-  private handleError<T> (operation = 'operation', result?: T) {
+  public logInUser(user: UserOfSystem): Observable<UserOfSystem> {
+    return this.http.get<UserOfSystem> (
+      `${this.usersOfSystemUrl}?email=${user.email}&password=${user.password}`
+    ).pipe (
+        catchError(this.handleError('getUsersOfSystem', []))
+      );
+  }
+  private handleError<T> (operation: string = 'operation', result?: T): any {
     return  (error: any): Observable<T> => {
       console.log(`${operation} failed: ${error.message}`);
       return of(result as T);

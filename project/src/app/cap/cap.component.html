@@ -4,13 +4,13 @@
       <div class="col-4">
         <h1 class="navbar-brand text-justify">SOCIAL NETWORK</h1>
       </div>
-      <div class="navbar-nav col-md-8">
-        <a routerLink="/users" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true } ">Home</a>
-        <a routerLink="/add" routerLinkActive="active" class="nav-item nav-link">Add user</a>
+      <div *ngIf="loginGuard.userLoggedIn" class="navbar-nav col-md-8">
+        <a routerLink="/display/all" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true } ">Home</a>
+        <a *ngIf="adminGuard.isAdmin" routerLink="/create/add" routerLinkActive="active" class="nav-item nav-link">Add user</a>
       </div>
     </div>
     <div class="col-4">
-      <form class="form-inline" style="flex-flow: inherit">
+      <form *ngIf="loginGuard.userLoggedIn" class="form-inline" style="flex-flow: inherit">
         <div>
           <input [(ngModel)]="search" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" />
         </div>

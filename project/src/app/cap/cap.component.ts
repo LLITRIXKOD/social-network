@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from '../user.service';
+import {AuthLoginGuard} from '../auth-login.guard';
+import {AuthIsAdminGuard} from '../auth-is-admin.guard';
 
 @Component({
   selector: 'app-cap',
@@ -9,7 +11,7 @@ import {UserService} from '../user.service';
 export class CapComponent {
   public search: string;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private loginGuard: AuthLoginGuard, private adminGuard: AuthIsAdminGuard) {
   }
 
   public onSubmit(): void {
