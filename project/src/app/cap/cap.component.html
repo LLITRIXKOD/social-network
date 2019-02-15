@@ -1,22 +1,31 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light row">
-    <div class="col-8 row">
-      <div class="col-4">
-        <h1 class="navbar-brand text-justify">SOCIAL NETWORK</h1>
-      </div>
-      <div *ngIf="loginGuard.userLoggedIn" class="navbar-nav col-md-8">
-        <a routerLink="/display/all" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true } ">Home</a>
-        <a *ngIf="adminGuard.isAdmin" routerLink="/create/add" routerLinkActive="active" class="nav-item nav-link">Add user</a>
-      </div>
-    </div>
-    <div class="col-4">
-      <form *ngIf="loginGuard.userLoggedIn" class="form-inline" style="flex-flow: inherit">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button *ngIf="authService.loggedIn" class="navbar-toggler" type="button" (click)="dropdown = !dropdown;">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">SOCIAL NETWORK</a>
+
+    <div [style.display]="dropdown ? 'block' : 'none'" class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a *ngIf="authService.loggedIn" routerLink="/display/all" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true } ">Home</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="authService.isAdmin" routerLink="/create/add" routerLinkActive="active" class="nav-link">Add user</a>
+        </li>
+      </ul>
+      <form *ngIf="authService.loggedIn" class="form-inline my-2 my-lg-0">
         <div>
-          <input [(ngModel)]="search" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" />
+          <input [(ngModel)]="search" name="search" class="form-control" type="search" placeholder="Search" />
         </div>
-        <button class="btn btn-outline-success my-2" (click)="onSubmit()" type="submit">Search</button>
-        <button class="btn" id="cross" (click)="showAll()">X</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="onSubmit()">
+          <i class="fa fa-search"></i>
+        </button>
+        <button [style.display]="!search ? 'none' : 'block'" class="btn" id="cross" (click)="showAll()">X</button>
       </form>
+      <div *ngIf="authService.loggedIn" class="output">
+        <a class="nav-link" routerLink="/auth">Выход</a>
+      </div>
     </div>
   </nav>
 </header>

@@ -1,4 +1,4 @@
-<div class="card mx-auto mt-2">
+<div class="card mx-auto my-4">
   <div class="" id="logoDiv">
     <img class="img-fluid mx-auto"
          [src]=" user?.file || 'https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg'"
@@ -27,5 +27,5 @@
       </ul>
     </div>
   </div>
-  <button *ngIf="adminGuard.isAdmin" class="btn btn-info" (click)="updateUser()">Update user</button>
+  <button *ngIf="authService.isAdmin" class="btn btn-info" (click)="updateUser()">Update user</button>
 </div>

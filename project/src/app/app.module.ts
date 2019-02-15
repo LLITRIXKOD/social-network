@@ -15,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import { LogInComponent } from './log-in/log-in.component';
 import {AuthLoginGuard} from './auth-login.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(httpClient);
@@ -26,6 +27,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     CapComponent,
     CellarComponent,
     LogInComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

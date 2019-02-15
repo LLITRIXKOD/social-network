@@ -5,7 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-cellar',
   templateUrl: './cellar.component.html',
-  styleUrls: ['./cellar.component.css'],
+  styleUrls: ['./cellar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CellarComponent {

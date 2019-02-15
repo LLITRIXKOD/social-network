@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../user.service';
 import {User} from '../../user';
-import {AuthIsAdminGuard} from '../../auth-is-admin.guard';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
   user: User;
@@ -16,7 +16,7 @@ export class UserDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private router: Router,
-    private adminGuard: AuthIsAdminGuard) {
+    private authService: AuthService) {
       this.haveVacation = false;
   }
 

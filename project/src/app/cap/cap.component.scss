@@ -1,15 +1,18 @@
-button {
-    border-color: #007bff;
-    color: #007bff;
+h1 {
+  word-break: break-all;
 }
 button:hover {
     background-color: #007bff;
 }
 button#cross {
-    font-size: 16px;
+  background: inherit;
+    font-size: 1.25em;
     color: black;
     border: none;
-}
-button#cross:hover {
+  &:hover {
     background-color: #cacaca8e;
+  }
+}
+.output {
+  padding-left: 0;
 }

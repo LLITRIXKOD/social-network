@@ -4,9 +4,13 @@
   <div class="container-fluid">
     <div class="list-group m-2 mt-4">
       <li *ngFor="let user of users; let i = index"
-          class="list-group-item list-group-item-action mb-1">
-        <a [routerLink]="'/display/detail/'+ user.id">{{ i + 1 }}. {{ user.firstName }} {{ user.lastName }}</a>
-        <button class="btn btn-primary btn-xs d-block col-1" (click)="openModal(content, user)" style="float: right;">x</button>
+          class="list-group-item list-group-item-action flex-row">
+        <div style="width: 95%">
+          <a [routerLink]="'/display/detail/'+ user.id">{{ i + 1 }}. {{ user.firstName }} {{ user.lastName }}</a>
+        </div>
+        <div>
+          <button class="btn btn-primary d-block" (click)="openModal(content, user)">x</button>
+        </div>
       </li>
     </div>
   </div>

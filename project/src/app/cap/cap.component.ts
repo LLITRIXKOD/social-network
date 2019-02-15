@@ -1,17 +1,17 @@
 import {Component} from '@angular/core';
 import {UserService} from '../user.service';
-import {AuthLoginGuard} from '../auth-login.guard';
-import {AuthIsAdminGuard} from '../auth-is-admin.guard';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-cap',
   templateUrl: './cap.component.html',
-  styleUrls: ['./cap.component.css']
+  styleUrls: ['./cap.component.scss']
 })
 export class CapComponent {
+  public dropdown = false;
   public search: string;
 
-  constructor(private userService: UserService, private loginGuard: AuthLoginGuard, private adminGuard: AuthIsAdminGuard) {
+  constructor(private userService: UserService, private authService: AuthService) {
   }
 
   public onSubmit(): void {

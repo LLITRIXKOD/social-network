@@ -55,7 +55,7 @@
         <input
           type="text"
           [formControlName]="i"
-          class="form-control col-md-11 ml-3"
+          class="form-control col-10 ml-3"
           [id]="'education' + i"
           [placeholder]="i + 1 + ' institution'"
         />
@@ -73,7 +73,7 @@
         <input type="date" [min]="pickVacationFromDate()" class="form-control" id="vacationTo" formControlName="to">
       </div>
     </div>
-  <input type="submit" class="btn btn-primary btn-lg" [disabled]="!newUserForm.valid" [value]="newUserForm.value.id ? 'Update user' : 'Add user'">
+  <input type="submit" class="btn btn-primary btn-lg" [disabled]="!newUserForm.valid || (newUserForm.value.id && !userIsUpdated())" [value]="newUserForm.value.id ? 'Update user' : 'Add user'">
 </form>
 
 <!--<label for="isQuery">Add query parameters</label>-->

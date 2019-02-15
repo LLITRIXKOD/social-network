@@ -8,7 +8,7 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit, OnDestroy {
   private pickUser: User = null;

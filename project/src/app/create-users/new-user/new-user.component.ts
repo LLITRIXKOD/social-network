@@ -5,6 +5,8 @@ import {User} from '../../user';
 import {DateValidator} from '../../forbidden-date-validator';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {Observable} from 'rxjs';
+import {DialogService} from '../../dialog.service';
 
 interface Specialty {
   name: string;
@@ -14,7 +16,7 @@ interface Specialty {
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
-  styleUrls: ['./new-user.component.css']
+  styleUrls: ['./new-user.component.scss']
 })
 export class NewUserComponent implements OnInit {
   public checked: boolean = false;
@@ -35,8 +37,10 @@ export class NewUserComponent implements OnInit {
       this.fb.control('')
     ]),
   });
+  private arrivedUser: User;
+  private submitClick: boolean = false;
   constructor(private router: Router, private userService: UserService, private fb: FormBuilder,
-              private route: ActivatedRoute, private toastr: ToastrService) {
+              private route: ActivatedRoute, private toastr: ToastrService, private dialogService: DialogService) {
     this.todayDate = new Date().toISOString().split('T')[0];
   }
   ngOnInit(): void {
@@ -49,6 +53,12 @@ export class NewUserComponent implements OnInit {
       console.log('OLOLO');
     });
   }
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.newUserForm.dirty && this.userIsUpdated() && this.submitClick === false) {
+      return this.dialogService.confirm('You want to get out of here? Unsaved data will be lost');
+    }
+    return true;
+  }
   public pickVacationToDate(): string {
     return this.newUserForm.value.vacation.to;
   }
@@ -56,6 +66,7 @@ export class NewUserComponent implements OnInit {
     return this.newUserForm.value.vacation.from || this.todayDate;
   }
   public onSubmit(): void {
+    this.submitClick = true;
     if (this.newUserForm.value.id) {
       this.updateUser();
     } else {
@@ -98,6 +109,7 @@ export class NewUserComponent implements OnInit {
   }
   private getUser(id: number): void {
     this.userService.getUser(id).subscribe((user) => {
+      this.arrivedUser = user;
       Object.keys(this.newUserForm.controls).forEach((item) => {
         if (item === 'birthday') {
           this.newUserForm.controls.birthday.setValue(new Date(user.birthday));
@@ -122,6 +134,12 @@ export class NewUserComponent implements OnInit {
     this.userService.addUser(user).subscribe(() => {
       this.toastr.success('', 'User successfully add', {timeOut: 3000, positionClass: 'toast-bottom-right'});
       this.router.navigateByUrl('/display/all');
+    });
+  }
+  private userIsUpdated(): boolean {
+    this.newUserForm.value.file = this.imageSrc;
+    return Object.keys(this.newUserForm.controls).some((item) => {
+      return JSON.stringify(this.newUserForm.value[item]) !== JSON.stringify(this.arrivedUser[item]);
     });
   }
 }

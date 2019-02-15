@@ -1,0 +1,15 @@
+li:hover {
+    cursor: pointer;
+}
+a {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+  color: #111533;
+}
+.list-group-item {
+  display: flex;
+}

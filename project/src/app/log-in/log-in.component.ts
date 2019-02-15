@@ -1,30 +1,36 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../user.service';
 import {UserOfSystem} from '../user-of-system';
-import {AuthLoginGuard} from '../auth-login.guard';
-import {AuthIsAdminGuard} from '../auth-is-admin.guard';
 import {Router} from '@angular/router';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss']
 })
-export class LogInComponent {
+export class LogInComponent implements OnInit {
   public email: string;
   public password: string;
-  constructor(private userService: UserService, private login: AuthLoginGuard, private admin: AuthIsAdminGuard, private router: Router ) { }
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private router: Router ) { }
+  ngOnInit(): void {
+    this.authService.loggedIn = false;
+    this.authService.isAdmin = false;
+  }
+
   public onSubmit(): void {
     const user: UserOfSystem = new UserOfSystem(this.email, this.password);
     this.userService.logInUser(user).subscribe(findUser => {
       if (!!findUser[0]) {
         if (findUser[0].role === 'admin') {
-          this.admin.isAdmin = true;
+          this.authService.isAdmin = true;
         }
-        this.login.userLoggedIn = true;
+        this.authService.loggedIn = true;
         this.router.navigateByUrl('/display/all');
       } else {
-        console.log('are not logged in');
+        console.log('are not logged in');   /*TODO: message*/
       }
     });
   }

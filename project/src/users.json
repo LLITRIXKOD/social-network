@@ -1,20 +1,6 @@
 {
   "users": [
     {
-      "id": 1550146665647,
-      "firstName": "Igorrr",
-      "lastName": "Marusich",
-      "birthday": "2019-02-01T21:00:00.000Z",
-      "vacation": {
-        "from": "",
-        "to": ""
-      },
-      "file": "",
-      "education": [
-        "BSUIR"
-      ]
-    },
-    {
       "id": 1550149868861,
       "firstName": "Oleg",
       "lastName": "Demidov",
